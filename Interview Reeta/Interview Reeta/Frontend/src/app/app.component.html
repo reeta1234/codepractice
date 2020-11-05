@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="form-row align-items-center">
+    <div class="col-sm-3 my-1">
+      <label class="sr-only" for="inlineFormInputName">Name</label>
+      <input type="text" class="form-control" id="inlineFormInputName" #name placeholder="Jane Doe">
+    </div>
+    
+    <div class="col-auto my-1">
+      <label for="exampleFormControlSelect1">Source</label>
+      <select class="form-control" id="exampleFormControlSelect1" #search>
+        <option value="hacker">Hacker</option>
+        <option value="wiki">Wiki</option>
+      </select>
+    </div>
+    
+    <div class="col-auto my-1">
+      <button type="submit" class="btn btn-primary" (click)="searchNews(name,search)">Submit</button>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div *ngIf="newsList" class="alert alert-primary">
+    Result For: {{name.value}}
+   </div>
+  <table class="table" *ngIf="newsList">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of newsList; index as i">
+        <th scope="row">{{i+1}}</th>
+        <td>{{list.title}}</td>
+        <td>{{list.author}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="newsList=='' && submitted">Result Not found</div>
+</div>
